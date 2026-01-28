@@ -58,3 +58,37 @@ A full example in a github actions workflow would be somehing like this:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_API_KEY }}
 ```
+
+## Local Testing
+
+You can test the conversion locally without running the GitHub Action using the `test-local.js` script.
+
+### Usage
+
+```bash
+# Direct markdown input
+node test-local.js "## v1.0.0
+### Features
+- New feature [PR-1](https://github.com/example)"
+
+# From a file
+node test-local.js --file CHANGELOG.md
+
+# With header
+node test-local.js --file CHANGELOG.md --header "New Release!"
+
+# With text field (for slack-send compatibility)
+node test-local.js --file CHANGELOG.md --text "Check out the latest release"
+
+# Combine options
+node test-local.js --file CHANGELOG.md --header "Release" --text "New version available"
+```
+
+### Options
+
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--file` | `-f` | Read markdown from a file |
+| `--text` | `-t` | Add text field to output |
+| `--header` | `-h` | Add a header block |
+| `--help` | | Show help message |
